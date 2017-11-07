@@ -1,0 +1,305 @@
+<div data-ix="popup-interaction" class="popup-box">
+    <div class="popup-div">
+      <div class="popup-close-div">
+        <a href="#" data-ix="popup-close" class="w-inline-block popup-close"><img width="35" height="35" src="images/closing_icon.png">
+        </a>
+      </div>
+      <h1 class="popup-heading">Scientific Support &amp; Reference Citations</h1>
+      <ol class="w-section">
+        <li class="popup-sourcelink" ng-repeat="l in supplement.studies"><a target="_blank" href="{{l.link}}">{{l.title}}</a>
+        </li>
+      </ol>
+    </div>
+</div>
+<div class="w-section info-section">
+    <div class="w-container info-container">
+      <div class="w-row info-row">
+        <div data-ix="load-1" class="w-col w-col-8 info-box-left">
+          <h2 class="info-header">{{supplement.name}}</h2>
+          <div data-ix="load-2" class="info-box-mid visible-mobile">
+            <div><img width="100%" src="products/{{supplement.name|lowercase}}.png" class="info-img" alt="No Image">
+              <div class="info-social-box">
+                <div class="info-box-social">
+                  <div class="w-row">
+                    <div class="w-col w-col-8 w-col-small-8 w-col-tiny-8 info-box-column">
+                      <img width="20" src="images/views-img.png" class="info-box-view-img">
+                      <div class="info-box-view-text">{{supplement.views}}</div>
+                    </div>
+                    <a class="w-col w-col-4 w-col-small-4 w-col-tiny-4 info-box-column" ng-click='favorite(supplement._id)'>
+                      <img width="20" src="images/iconheart-img{{faved}}.png" class="info-box-view-img">
+                      <div class="info-box-view-text">{{favs}}</div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="counter-box">
+              <p class="counter-copu">Reference &amp; Study Counter</p>
+              <p class="counter-sub-copy">Indicates the number of citations on this page.
+                <br>Click below to view all.</p>
+              <div data-ix="popup-open" class="counter-circle">
+                <h1 class="counter-heading">{{supplement.studies.length}}</h1>
+              </div>
+            </div>
+          </div>
+          <pre class="info-paragraph">{{supplement.description}}</pre>
+        </div>
+        <div data-ix="load-2" class="w-col w-col-4 info-box-mid hidden-mobile">
+          <div><img width="100%" src="products/{{supplement.name|lowercase}}.png" class="info-img" alt="No Image">
+            <div class="info-social-box">
+              <div class="info-box-social">
+                <div class="w-row">
+                  <div class="w-col w-col-8 w-col-small-8 w-col-tiny-8 info-box-column">
+                    <img width="20" src="images/views-img.png" class="info-box-view-img">
+                    <div class="info-box-view-text">{{supplement.views}}</div>
+                  </div>
+                  <a class="w-col w-col-4 w-col-small-4 w-col-tiny-4 info-box-column" ng-click='favorite(supplement._id)'>
+                    <img width="20" src="images/iconheart-img{{faved}}.png" class="info-box-view-img">
+                    <div class="info-box-view-text">{{favs}}</div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="counter-box">
+            <p class="counter-copu">Reference &amp; Study Counter</p>
+            <p class="counter-sub-copy">Indicates the number of citations on this page.
+              <br>Click below to view all.</p>
+            <div data-ix="popup-open" class="counter-circle">
+              <h1 class="counter-heading">{{supplement.studies.length}}</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div data-ix="slide-in-up" class="w-section bluediv">
+    <div class="w-container">
+      <div class="w-row">
+        <div data-ix="load-3" class="w-col w-col-6 blue-div-column">
+          <div class="blue-div-heading"><img src="images/shield.png" class="blue-div-img">
+            <h1 class="bluediv-heading">Vitamn Score</h1>
+          </div>
+          <p class="bluediv-text">Our Vitamn Score looks at over {{supplement.studies.length}} studies (excluding animal studies) to tell you what effects {{supplement.name}} has on your body, and how strong these effects are.</p>
+        </div>
+        <div data-ix="load-4" class="w-col w-col-6 blue-div-column"><img src="images/example_matrix.png" class="blue-div-example">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="w-section effect-section"><div class="effect-div" ng-repeat="(cate, effect) in effects" ng-if="effect.length>0">
+      <h2 class="most-pop-header {{cate|lowercase}}">{{cate|uppercase}}</h2>
+      <ul class="w-list-unstyled effect-matrix">
+        <li class="effect-matrix-item" ng-repeat="row in effect">
+          <div class="w-row effect-topic">
+            <div title="{{row.comments}}" class="w-col w-col-2 w-col-medium-4 w-col-small-4 w-col-tiny-4 effect-arrow-box">
+              <div class="circle-up-{{colorMap[cate]}}" ng-if="row.change[0]=='up'"></div>
+              <div class="circle-down-{{colorMap[cate]}}" ng-if="row.change[0]=='down'"></div>
+              <div class="circle-minus-{{colorMap[cate]}}" ng-if="row.change[0]=='minus'"></div>
+            </div>
+            <div class="w-col w-col-6 w-col-medium-4 w-col-small-4 w-col-tiny-4 effect-topic-box">
+              <h4 class="effect-topic-text"><a href="search/{{cate}}/{{row.topic}}">{{row.topic}}</a></h4>
+            </div>
+            <div class="w-col w-col-4 w-col-medium-4 w-col-small-4 w-col-tiny-4 effect-flash-box">
+              <div title="The lightning bolts reflect the strength of the effect. Ranging from no effect to very strong effect on the body." class="w-row effect-flash-raw">
+                <div class="w-col w-col-4 w-col-small-4 w-col-tiny-4 effect-flash-column" ng-repeat="rating in [0, 1, 2]">
+                  <img width="25" src="images/flash-dark.png" class="effect-flash-dark" ng-if="row.rating > rating">
+                  <img width="25" src="images/flash-light.png" class="effect-flash-light" ng-if="row.rating <= rating">
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul></div></div>
+  <div class="w-section product-section">
+    <div class="w-container product-container">
+      <div class="w-row product-row" ng-if="restrictedItem == null">
+        <div class="w-col w-col-4 product-column">
+          <div class="spinner" ng-if="bestMatch == null">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+          </div>
+          <div class="product-block" ng-if="bestMatch != null">
+            <div class="product-header">
+              <div class="w-row">
+                <div class="w-col w-col-3 w-col-medium-6 w-col-small-6 w-col-tiny-6">
+                  <img width="50" src="images/best_review.png" class="w-hidden-small w-hidden-tiny best-img">
+                </div>
+                <div class="w-col w-col-9 w-col-medium-6 w-col-small-6 w-col-tiny-6">
+                  <h1 class="best-header">On Sale</h1>
+                </div>
+              </div>
+            </div>
+            <a href="{{bestMatch.url}}" class="product-img-a" target="_blank" onclick="trackOutboundLink(this); return false;">
+              <div class="product-img-div" style="background-image: url('{{bestMatch.img}}')"></div>
+            </a>
+            <div class="product-description-div">
+              <p class="product-description-box">
+                <strong data-new-link="true" class="product-description-text">{{bestMatch.title}}</strong>
+              </p>
+            </div><div class="product-review-div">
+              <div class="product-price-div">
+                <div>
+                  <div class="price-block">
+                    <p class="price-text">{{bestMatch.price}}</p>
+                  </div>
+                </div>
+              </div><div class="reviews-box">
+                <img src="{{bestMatch.reviewimg}}"/>
+                <a class="review-text" target="_blank" href="{{bestMatch.url}}#revMHLContainer" ng-if="bestMatch.reviewcount.length > 0">{{bestMatch.reviewcount|lowercase}}</a>
+                <p class="review-text" ng-if="bestMatch.reviewcount == null">No Review</a>
+              </div>
+            </div>
+            <div class="explore-box">
+              <a href="{{bestMatch.url}}" class="w-button explore-products" target="_blank" onclick="
+              trackOutboundLink(this); return false;">Buy from <strong data-new-link="true">Amazon USA</strong></a>
+            </div>
+          </div>
+        </div>
+        <div class="w-col w-col-4 product-column">
+          <div class="spinner" ng-if="bestValue == null">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+          </div>
+          <div class="product-block" ng-if="bestValue != null">
+            <div class="product-header">
+              <div class="w-row">
+                <div class="w-col w-col-3 w-col-medium-6 w-col-small-6 w-col-tiny-6">
+                  <img width="50" src="images/best_value.png" class="w-hidden-small w-hidden-tiny best-img">
+                </div>
+                <div class="w-col w-col-9 w-col-medium-6 w-col-small-6 w-col-tiny-6">
+                  <h1 class="best-header">Best Value</h1>
+                </div>
+              </div>
+            </div>
+            <a href="{{bestValue.url}}" class="product-img-a" target="_blank" onclick="trackOutboundLink(this); return false;">
+              <div class="product-img-div" style="background-image: url('{{bestValue.img}}')"></div>
+            </a>
+            <div class="product-description-div">
+              <p class="product-description-box">
+                <strong data-new-link="true" class="product-description-text">{{bestValue.title}}</strong>
+              </p>
+            </div>
+            <div class="product-review-div">
+              <div class="product-price-div">
+                <div>
+                  <div class="price-block">
+                    <p class="price-text">{{bestValue.price}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="reviews-box">
+                <img src="{{bestValue.reviewimg}}"/>
+                <a class="review-text" target="_blank" href="{{bestValue.url}}#revMHLContainer" ng-if="bestValue.reviewcount.length > 0">{{bestValue.reviewcount||lowercase}}</a>
+                <p class="review-text" ng-if="bestValue.reviewcount == null">No Review</a>
+              </div>
+            </div>
+            <div class="explore-box">
+              <a href="{{bestValue.url}}" class="w-button explore-products" target="_blank" onclick="trackOutboundLink(this); return false;">Buy from <strong data-new-link="true">Amazon USA</strong></a>
+            </div>
+          </div>
+        </div>
+        <div class="w-col w-col-4 product-column">
+          <div class="spinner" ng-if="bestSeller == null">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+          </div>
+          <div class="product-block" ng-if="bestSeller != null">
+            <div class="product-header">
+              <div class="w-row">
+                <div class="w-col w-col-3 w-col-medium-6 w-col-small-6 w-col-tiny-6">
+                  <img width="50" src="images/best_seller.png" class="w-hidden-small w-hidden-tiny best-img">
+                </div>
+                <div class="w-col w-col-9 w-col-medium-6 w-col-small-6 w-col-tiny-6">
+                  <h1 class="best-header">Best Seller</h1>
+                </div>
+              </div>
+            </div>
+            <a href="{{bestSeller.url}}" class="product-img-a" target="_blank" onclick="trackOutboundLink(this); return false;">
+              <div class="product-img-div" style="background-image: url('{{bestSeller.img}}')"></div>
+            </a>
+            <div class="product-description-div">
+              <p class="product-description-box">
+                <strong data-new-link="true" class="product-description-text">{{bestSeller.title}}</strong>
+              </p>
+            </div>
+            <div class="product-review-div">
+              <div class="product-price-div">
+                <div>
+                  <div class="price-block">
+                    <p class="price-text">{{bestSeller.price}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="reviews-box">
+                <img src="{{bestSeller.reviewimg}}"/>
+                <a class="review-text" target="_blank" href="{{bestSeller.url}}#revMHLContainer" ng-if="bestSeller.reviewcount.length > 0">{{bestSeller.reviewcount|lowercase}}</a>
+                <p class="review-text" ng-if="bestSeller.reviewcount == null">No Review</a>
+              </div>
+            </div>
+            <div class="explore-box">
+              <a href="{{bestSeller.url}}" class="w-button explore-products" target="_blank" onclick="trackOutboundLink(this); return false;">Buy from <strong data-new-link="true">Amazon USA</strong></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div data-ix="slide-in-up" class="w-section bluediv" ng-if="restrictedItem != null">
+    <div class="w-container nootropic-box">
+      <h1 class="nootropic-box-header">Disclaimer</h1>
+      <p class="nootropic-box-text">{{supplement.name}} is a prescription drug and may not be available in your country, to learn more please visit the links below or check out any of our trusted sources.</p>
+      <div class="w-row">
+        <div class="w-col w-col-6"><a href="{{restrictedItem.wiki}}" class="w-button nootropic-box-button" target="_blank">Wikipedia</a>
+        </div>
+        <div class="w-col w-col-6"><a href="{{restrictedItem.link}}" class="w-button nootropic-box-button" target="_blank">{{restrictedItem.suppliername}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="w-section comment-section">
+    <div class="w-container comment-div">
+      <div class="w-embed w-script comment-html">
+        <div id="disqus_thread"></div>
+        <script>
+          (function() {  // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = '//vitamn.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+  </div>
+
+
+<script>
+    Webflow.require('ix').init([
+    {"slug":"dropdown-animation","name":"Dropdown Animation","value":{"style":{"opacity":0,"x":"0px","y":"-10px","z":"0px"},"triggers":[{"type":"dropdown","stepsA":[{"opacity":1,"transition":"transform 500ms ease 0ms, opacity 500ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[{"opacity":0,"transition":"transform 500ms ease 0ms, opacity 500ms ease 0ms","x":"0px","y":"-10px","z":"0px"},{"opacity":0,"wait":1000,"transition":"opacity 500ms ease 0ms"}]}]}},
+    {"slug":"thumbnail","name":"Thumbnail","value":{"style":{"opacity":0},"triggers":[{"type":"hover","loopA":true,"stepsA":[{"opacity":1,"wait":600,"transition":"opacity 500ms ease 0ms"}],"stepsB":[{"opacity":0,"wait":200,"transition":"opacity 500ms ease 0ms"}]}]}},
+    {"slug":"load-1","name":"Load-1","value":{"style":{"opacity":0},"triggers":[{"type":"load","stepsA":[{"opacity":1,"transition":"opacity 400ms ease-in-cubic 0ms"}],"stepsB":[]}]}},
+    {"slug":"load-2","name":"Load- 2","value":{"style":{"opacity":0},"triggers":[{"type":"load","stepsA":[{"opacity":1,"transition":"opacity 600ms ease-in-cubic 0ms"}],"stepsB":[]}]}},
+    {"slug":"load-3","name":"Load- 3","value":{"style":{"opacity":0},"triggers":[{"type":"load","stepsA":[{"opacity":1,"transition":"opacity 800ms ease-in-cubic 0ms"}],"stepsB":[]}]}},
+    {"slug":"load-4","name":"Load- 4","value":{"style":{"opacity":0},"triggers":[{"type":"load","stepsA":[{"opacity":1,"transition":"opacity 1000ms ease-in-cubic 0ms"}],"stepsB":[]}]}},
+    {"slug":"load-5","name":"Load- 5","value":{"style":{"opacity":0},"triggers":[{"type":"load","stepsA":[{"opacity":1,"transition":"opacity 1200ms ease-in-cubic 0ms"}],"stepsB":[]}]}},
+    {"slug":"slide-up","name":"Slide up","value":{"style":{"opacity":0,"x":"0px","y":"50px","z":"0px"},"triggers":[{"type":"load","stepsA":[{"opacity":1,"transition":"transform 700ms ease-in-sine 0ms, opacity 1200ms ease-in 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
+    {"slug":"popup-interaction","name":"popup-interaction","value":{"style":{"display":"none","opacity":0},"triggers":[{"type":"click","selector":".popup-box","siblings":true,"stepsA":[{"display":"none","opacity":0,"transition":"opacity 500ms ease 0ms"}],"stepsB":[]}]}},
+    {"slug":"popup-open","name":"popup-open","value":{"style":{},"triggers":[{"type":"click","selector":".popup-box","stepsA":[{"display":"block","opacity":1,"transition":"opacity 700ms ease-in-out 0ms"}],"stepsB":[]}]}},
+    {"slug":"popup-close","name":"popup-close","value":{"style":{},"triggers":[{"type":"click","selector":".popup-box","stepsA":[{"display":"none","opacity":0,"transition":"opacity 500ms ease 0ms"}],"stepsB":[]}]}},
+    {"slug":"slide-out","name":"Slide out","value":{"style":{"opacity":0,"x":"0px","y":"-100px","z":"0px"},"triggers":[{"type":"load","stepsA":[{"opacity":1,"transition":"transform 500ms ease-in-sine 0ms, opacity 500ms ease-in-sine 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
+    {"slug":"slide-in-up","name":"slide-in-up","value":{"style":{"opacity":0,"x":"0px","y":"100px","z":"0px"},"triggers":[{"type":"load","stepsA":[{"opacity":1,"transition":"transform 700ms ease-out-cubic 0ms, opacity 500ms linear 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}}
+  ]);
+</script>
